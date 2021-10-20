@@ -3,3 +3,6 @@ class Pub:
         self.name = name
         self.till = till
         self.drinks = []
+        
+    def pub_till_change(self, amount):
+        self.till += amount
