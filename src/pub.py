@@ -19,7 +19,8 @@ class Pub:
         return customer.age >= 18
         
     def sell_drink_to_customer(self, customer, drink):
-        self.find_drink_by_name(drink)
-        customer.customer_wallet_change(drink.price)
-        self.pub_till_change(drink.price)
+        if self.check_age(customer):
+            self.find_drink_by_name(drink)
+            customer.customer_wallet_change(drink.price)
+            self.pub_till_change(drink.price)
         

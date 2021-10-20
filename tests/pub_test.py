@@ -38,11 +38,25 @@ class TestPub(unittest.TestCase):
         self.assertEqual(10, customer.wallet)
         self.assertEqual(1005.50, self.pub.till)
 
-    def test_customer_old_enough(self):
+    def test_check_age(self):
         customer = Customer("Jean-Pierre", 15.50, 21)
         self.assertEqual(True, self.pub.check_age(customer))
-        
-    def test_customer_not_old_enough(self):
-        customer = Customer("Sam", 5.00, 17)
-        self.assertEqual(False, self.pub.check_age(customer))
+
+    def test_customer_can_buy_drink(self):
+        drink = Drink("Innis & Gunn", 5.50)
+        customer = Customer("Jean-Pierre", 15.50, 21)
+        self.pub.add_drinks_to_pub(drink)
+        self.pub.find_drink_by_name(drink)
+        self.pub.sell_drink_to_customer(customer, drink)
+        self.assertEqual(10, customer.wallet)
+        self.assertEqual(1005.5, self.pub.till)
+
+    def test_customer_cant_buy_drink(self):
+        drink = Drink("Innis & Gunn", 5.50)
+        customer = Customer("Sam", 10, 17)
+        self.pub.add_drinks_to_pub(drink)
+        self.pub.find_drink_by_name(drink)
+        self.pub.sell_drink_to_customer(customer, drink)
+        self.assertEqual(10, customer.wallet)
+        self.assertEqual(1000, self.pub.till)
 
