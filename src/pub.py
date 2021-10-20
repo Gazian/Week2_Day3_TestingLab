@@ -9,3 +9,8 @@ class Pub:
         
     def add_drinks_to_pub(self, drink):
         self.drinks.append(drink)
+    
+    def find_drink_by_name(self, name):
+        for drink in self.drinks:
+            if drink.name == name:
+                return drink.name

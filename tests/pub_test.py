@@ -24,3 +24,11 @@ class TestPub(unittest.TestCase):
         # print(self.pub.drinks[0].name)
         # print(self.pub.drinks[0].price)
         self.assertEqual(1, len(self.pub.drinks))
+        
+    def test_find_drink_by_name(self):
+        drink_1 = Drink("Beavertown IPA", 4.50)
+        drink_2 = Drink("Innis & Gunn", 5.50)
+        self.pub.add_drinks_to_pub(drink_1)
+        self.assertEqual("Beavertown IPA", self.pub.find_drink_by_name(drink_1.name))
+        self.pub.add_drinks_to_pub(drink_2)
+        self.assertEqual("Innis & Gunn", self.pub.find_drink_by_name(drink_2.name))
