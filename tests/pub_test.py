@@ -2,7 +2,7 @@ import unittest
 from src.pub import Pub
 from src.drink import Drink
 from src.customer import Customer
-import pdb
+# import pdb
 
 class TestPub(unittest.TestCase):
     def setUp(self):
@@ -31,10 +31,18 @@ class TestPub(unittest.TestCase):
 
     def test_sell_drink_to_customer(self):
         drink = Drink("Innis & Gunn", 5.50)
-        customer = Customer("Jean-Pierre",15.50)
-        pdb.set_trace()
+        customer = Customer("Jean-Pierre", 15.50, 21)
         self.pub.add_drinks_to_pub(drink)
         self.pub.find_drink_by_name(drink)
-        self.pub.sell_drink_to_customer(drink, customer)
+        self.pub.sell_drink_to_customer(customer, drink)
         self.assertEqual(10, customer.wallet)
         self.assertEqual(1005.50, self.pub.till)
+
+    def test_customer_old_enough(self):
+        customer = Customer("Jean-Pierre", 15.50, 21)
+        self.assertEqual(True, self.pub.check_age(customer))
+        
+    def test_customer_not_old_enough(self):
+        customer = Customer("Sam", 5.00, 17)
+        self.assertEqual(False, self.pub.check_age(customer))
+
