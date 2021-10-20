@@ -13,4 +13,8 @@ class Pub:
     def find_drink_by_name(self, name):
         for drink in self.drinks:
             if drink.name == name:
-                return drink.name
+                return drink
+            
+        #     customer selects drink
+        # customer wallet change
+        # bank till increases

@@ -1,6 +1,7 @@
 import unittest
 from src.pub import Pub
 from src.drink import Drink
+from src.customer import Customer
 # import pdb
 
 class TestPub(unittest.TestCase):
@@ -26,9 +27,16 @@ class TestPub(unittest.TestCase):
         self.assertEqual(1, len(self.pub.drinks))
         
     def test_find_drink_by_name(self):
-        drink_1 = Drink("Beavertown IPA", 4.50)
-        drink_2 = Drink("Innis & Gunn", 5.50)
-        self.pub.add_drinks_to_pub(drink_1)
-        self.assertEqual("Beavertown IPA", self.pub.find_drink_by_name(drink_1.name))
-        self.pub.add_drinks_to_pub(drink_2)
-        self.assertEqual("Innis & Gunn", self.pub.find_drink_by_name(drink_2.name))
+        drink = Drink("Beavertown IPA", 4.50)
+        self.pub.add_drinks_to_pub(drink)
+        found_drink = self.pub.find_drink_by_name(drink.name)
+        self.assertEqual("Beavertown IPA", found_drink.name)
+
+    def test_sell_drink_to_customer(self):
+        drink = Drink("Innis & Gunn", 5.50)
+        customer = Customer("Jean-Pierre",15.50)
+        self.pub.add_drinks_to_pub(drink)
+        self.pub.find_drink_by_name(drink)
+        self.pub.sell_drink_to_customer(customer)
+        self.assertEqual(10, self.customer.wallet)
+        self.assertEqual(1005.50, self.pub.till)
