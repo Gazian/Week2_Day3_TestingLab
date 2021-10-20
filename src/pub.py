@@ -14,7 +14,8 @@ class Pub:
         for drink in self.drinks:
             if drink.name == name:
                 return drink
-            
-        #     customer selects drink
-        # customer wallet change
-        # bank till increases
+    
+    def sell_drink_to_customer(self, drink, customer):
+        self.find_drink_by_name(drink)
+        customer.customer_wallet_change(drink.price)
+        self.pub_till_change(drink.price)
